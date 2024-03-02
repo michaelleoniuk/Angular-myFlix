@@ -1,49 +1,62 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-// Import to close the dialog on success
+//Closes the dialogue on success
 import { MatDialogRef } from '@angular/material/dialog';
-
-// Import to bring in the API call created in 6.2
+//Imports the API calls
 import { FetchApiDataService } from '../fetch-api-data.service';
-
-// Import to display notifications back to the user
+//Notifications to the user
 import { MatSnackBar } from '@angular/material/snack-bar';
-
 import { Router } from '@angular/router';
 
+/**
+* @description Component representing the user login form.
+* @selector: 'app-user-login-form'
+* @templateUrl: './user-login-form.component.html'
+* @styleUrls: ['./user-login-form.component.scss']
+*/
 @Component({
   selector: 'app-user-login-form',
   templateUrl: './user-login-form.component.html',
-  styleUrls: ['./user-login-form.component.scss'],
+  styleUrl: './user-login-form.component.scss'
 })
-export class UserLoginFormComponent implements OnInit{
+export class UserLoginFormComponent {
 
-  @Input() userData = { Username: '', Password: '' }
+    /** Input for user data including username and password. */
+    @Input() userData = { Username: '', Password: ''}
 
-  constructor(
-    public fetchApiData: FetchApiDataService,
-    public dialogRef: MatDialogRef<UserLoginFormComponent>,
-    public snackbar: MatSnackBar,
-    public router: Router) { }
+    /**
+    * @constructor
+    * @param {UserRegistrationService} userRegistrationAPI - Service for user registration API calls.
+    * @param {MatDialogRef<UserLoginFormComponent>} dialogRef - Reference to the dialog for closing.
+    * @param {MatSnackBar} snackBar - Angular Material's MatSnackBar service for notifications.
+    * @param {Router} router - Angular's Router service for navigation.
+    */
+    constructor(
+        public FetchApiDataService: FetchApiDataService,
+        public dialogRef: MatDialogRef<UserLoginFormComponent>,
+        public snackBar: MatSnackBar,
+        private router: Router,
+    ){}
 
-  ngOnInit(): void {
-  }
 
-  // Function responsible for sending the form inputs to the backend
-  loginUser(): void {
-    this.fetchApiData.userLogin(this.userData).subscribe((result) => {
-      //Logic for a successful user login
-      console.log(result);
-      this.dialogRef.close(); // Will close modal on success (To be implemented)
-      this.snackbar.open('User login successful', 'OK', {
-        duration: 2000
-      });
-    }, (result) => {
-      console.log(result);
-      this.snackbar.open('User login successful', 'OK', {
-        duration: 2000
-      });
-    });
-  }
-
+    /**
+    * @description Sends user login form information to the backend.
+    * Closes the dialog on success, displays a success message, and navigates to the movies page.
+    * Shows an error message on failure and logs the error.
+    */
+    loginUser():void {
+        this.FetchApiDataService.userLogin(this.userData).subscribe((result) => {
+            this.dialogRef.close();
+            result;
+            this.snackBar.open('Logged In!  Welcome!', 'OK', {
+                duration: 2000
+            });
+            this.router.navigate(['movies']);
+        }, (error) => {
+            this.snackBar.open('Login Not Successful', 'OK', {
+                duration: 2000
+            });
+            console.error('Login failed: ', error);
+        });
+    }
 }
