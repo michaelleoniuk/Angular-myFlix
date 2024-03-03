@@ -4,9 +4,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-import { DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 //Angular - Material
 import { MatInputModule }  from '@angular/material/input';
@@ -32,6 +32,7 @@ import { MainViewComponent } from './main-view/main-view.component';
 import { DirectorComponent } from './director/director.component';
 import { GenreComponent } from './genre/genre.component';
 import { ProfileComponent } from './profile-page/profile-page.component';
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
 
 
 const appRoutes: Routes = [
@@ -56,6 +57,7 @@ const appRoutes: Routes = [
       DirectorComponent,
       GenreComponent,
       ProfileComponent,
+      MovieDetailsComponent,
     ],
   imports: [
     BrowserModule,
@@ -76,7 +78,9 @@ const appRoutes: Routes = [
     MatDatepickerModule,
     MatNativeDateModule
   ],
-  providers: [DatePipe],
+
+  providers:[MainViewComponent],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
