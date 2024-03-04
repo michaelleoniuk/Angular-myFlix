@@ -4,7 +4,7 @@ import { UserRegistrationFormComponent } from '../user-registration-form/user-re
 import { UserLoginFormComponent } from '../user-login-form/user-login-form.component';
 
 @Component({
-  selector: 'app-welcome',
+  selector: 'app-welcome-page',
   templateUrl: './welcome-page.component.html',
   styleUrls: ['./welcome-page.component.scss']
 })

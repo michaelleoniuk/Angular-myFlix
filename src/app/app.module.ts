@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideHttpClient, withFetch } from '@angular/common/http';
 
 //Angular - Material
 import { MatInputModule }  from '@angular/material/input';
@@ -28,7 +27,6 @@ import { UserLoginFormComponent } from './user-login-form/user-login-form.compon
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { MainViewComponent } from './main-view/main-view.component';
 import { DirectorComponent } from './director/director.component';
 import { GenreComponent } from './genre/genre.component';
 import { ProfileComponent } from './profile-page/profile-page.component';
@@ -37,7 +35,7 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
 
 const appRoutes: Routes = [
     { path: 'welcome', component: WelcomePageComponent},
-    { path: 'movies', component: MainViewComponent},
+    { path: 'movies', component: MovieDetailsComponent},
     { path: '', redirectTo: 'welcome', pathMatch: 'prefix'},
 ];
 
@@ -53,7 +51,6 @@ const appRoutes: Routes = [
       MovieCardComponent,
       WelcomePageComponent,
       NavbarComponent,
-      MainViewComponent,
       DirectorComponent,
       GenreComponent,
       ProfileComponent,
@@ -76,10 +73,10 @@ const appRoutes: Routes = [
     MatMenuModule,
     ReactiveFormsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
 
-  providers:[MainViewComponent],
+  providers:[MovieDetailsComponent],
   
   bootstrap: [AppComponent]
 })

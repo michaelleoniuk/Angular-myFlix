@@ -1,16 +1,61 @@
-<mat-card class="summary-dialog">
-    <button
-      class="summary-close-button"
-      mat-stroked-button
-      aria-label="Close the summary button"
-      mat-dialog-close
-      color="primary"
-      style="color: black;"
-    >
-      X
-    </button>
-    <br />
-    <mat-dialog-content class="summary-dialog-content" style="color: black;">
-      <b>Description: </b>{{ data.details }}
-    </mat-dialog-content>
-  </mat-card>
+<div class = "card-container">
+    <mat-card *ngFor="let movie of currentmovies" class="movie-card">
+        <mat-card-header style="margin: 0 auto">
+            <mat-card-title
+                style = "
+                    font-size: 1.5em;
+                    white-space: nowrap;
+                    overflow: hidden;
+                "        
+            >
+                {{movie.Title}}
+            </mat-card-title>
+            <mat-card-subtitle
+                style="color: rgba(255,255,255,0.5);"
+            >
+                Directed by: {{movie.Director.Name}}
+            </mat-card-subtitle>
+        </mat-card-header>
+        <img 
+        class="movie-image"
+        src="{{ movie.ImagePath }}"
+        alt="{{ movie.Title }}"
+        (click)="openMovieCardDialog(movie)"
+        (keydown.enter)="openMovieCardDialog(movie)"
+    />
+        
+        <mat-card-actions
+            class="button-bar"
+        >
+            <button
+                mat-raised-button
+                color="primary"
+                style="margin: auto 2px"
+                (click)="openGenreCardDialog(movie.Genre)"
+            >
+                Genre
+            </button>
+            <button
+                mat-raised-button
+                color="primary"
+                style="margin: auto 2px"
+                (click)="openDirectorCardDialog(movie.Director)"
+            >
+                Director
+            </button>
+            <button
+                mat-raised-button
+                color="primary"
+                style="margin: auto 2px"
+                (click)="openMovieCardDialog(movie)"
+            >
+                Synopsis
+            </button>
+            <button
+                mat-icon-button (click)="toggleFavorite(movie)"
+            >
+                <mat-icon> {{getFavorites(movie)? 'favorite' : 'favorite_border'}}</mat-icon>
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>
