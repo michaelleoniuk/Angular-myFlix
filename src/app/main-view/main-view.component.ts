@@ -32,7 +32,7 @@ export class MainViewComponent implements OnInit {
           });
         }
 
-        isFavorite(movie: any): boolean {
+        getFavoriteMovies(movie: any): boolean {
             let favoriteMovies: any[] = [];
             this.fetchApiData.getFavoriteMovies().subscribe((resp: any) => {
                 favoriteMovies = resp;

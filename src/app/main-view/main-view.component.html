@@ -13,13 +13,13 @@
             <mat-card-subtitle
                 style="color: rgba(255,255,255,0.5);"
             >
-                Directed by: {{movie.director.name}}
+                Directed by: {{movie.Director.Name}}
             </mat-card-subtitle>
         </mat-card-header>
         <img 
             class="movie-image"
-            src={{movie.image}}
-            alt={{movie.title}}
+            src={{movie.ImagePath}}
+            alt={{movie.Title}}
             (click)="openMovieCardDialog(movie)"
             (keydown.enter)="openMovieCardDialog(movie)"
             tabindex=i
@@ -32,7 +32,7 @@
                 mat-raised-button
                 color="primary"
                 style="margin: auto 2px"
-                (click)="openGenreCardDialog(movie.genre)"
+                (click)="openGenreCardDialog(movie.Genre)"
             >
                 Genre
             </button>
@@ -40,7 +40,7 @@
                 mat-raised-button
                 color="primary"
                 style="margin: auto 2px"
-                (click)="openDirectorCardDialog(movie.director)"
+                (click)="openDirectorCardDialog(movie.Director)"
             >
                 Director
             </button>
@@ -55,7 +55,7 @@
             <button
                 mat-icon-button (click)="toggleFavorite(movie)"
             >
-                <mat-icon> {{isFavorite(movie)? 'favorite' : 'favorite_border'}}</mat-icon>
+                <mat-icon> {{getFavoriteMovies(movie)? 'favorite' : 'favorite_border'}}</mat-icon>
             </button>
         </mat-card-actions>
     </mat-card>
