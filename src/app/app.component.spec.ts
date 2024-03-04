@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'myFlix-Angular-Client'`, () => {
+  it(`should have as title 'movie_api_angular_client'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('myFlix-Angular-Client');
+    expect(app.title).toEqual('movie_api_angular_client');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, myFlix-Angular-Client');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, movie_api_angular_client');
   });
 });

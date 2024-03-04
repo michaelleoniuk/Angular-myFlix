@@ -16,8 +16,14 @@ export class FetchApiDataService {
   private userData = new BehaviorSubject<Object>({ Username: '', Password: '', Email: '', Birth: ''});
   currentUser = this.userData.asObservable();
 
+  private user: any = {};
+
   private movies = new BehaviorSubject<Object>({});
   moviesList = this.movies.asObservable(); 
+
+  private currentMovies: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+
+  public currentMovies$: Observable<any[]> = this.currentMovies.asObservable();
 
   constructor(private http: HttpClient) {
   }
@@ -35,6 +41,10 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
+
+  public hasUser(): boolean {
+    return Object.keys(this.user).length > 0;
+}
 
    public getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');

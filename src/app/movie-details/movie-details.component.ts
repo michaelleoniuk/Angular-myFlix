@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MovieCardComponent } from '../movie-card/movie-card.component';
 import { DirectorComponent } from '../director/director.component';
 import { GenreComponent } from '../genre/genre.component';
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,11 +12,14 @@ import { Router } from '@angular/router';
   templateUrl: './movie-details.component.html',
   styleUrl: './movie-details.component.scss'
 })
-export class MovieDetailsComponent implements OnInit {
+export class MovieDetailsComponent implements OnInit{
 
+    movies: any[] = []
     currentmovies: any[] = []
+    currentMoviesSubscription: Subscription = new Subscription();
 
-    constructor (public fetchApiData: FetchApiDataService,
+    constructor (
+        public fetchApiData: FetchApiDataService,
         private router: Router,
         private dialog: MatDialog,
     ) { }

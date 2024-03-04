@@ -1,5 +1,5 @@
 <div class = "card-container">
-    <mat-card *ngFor="let movie of currentmovies" class="movie-card">
+    <mat-card *ngFor="let movie of currentmovies; let i=index" class="movie-card">
         <mat-card-header style="margin: 0 auto">
             <mat-card-title
                 style = "
@@ -17,12 +17,13 @@
             </mat-card-subtitle>
         </mat-card-header>
         <img 
-        class="movie-image"
-        src="{{ movie.ImagePath }}"
-        alt="{{ movie.Title }}"
-        (click)="openMovieCardDialog(movie)"
-        (keydown.enter)="openMovieCardDialog(movie)"
-    />
+            class="movie-image"
+            src={{movie.ImagePath}}
+            alt={{movie.Title}}
+            (click)="openMovieCardDialog(movie)"
+            (keydown.enter)="openMovieCardDialog(movie)"
+            tabindex=i
+        />
         
         <mat-card-actions
             class="button-bar"
