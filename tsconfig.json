@@ -2,6 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "normalTypeScriptOptions": "here",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -29,5 +30,14 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  
+  "typedocOptions": {
+    "entryPoints": ["src/index.ts"],
+    "out": "docs"
 }
+}
+
+
+ 
+
