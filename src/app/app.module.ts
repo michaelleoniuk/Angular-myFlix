@@ -36,6 +36,7 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
 const appRoutes: Routes = [
     { path: 'welcome', component: WelcomePageComponent},
     { path: 'movies', component: MovieDetailsComponent},
+    { path: 'profile', component: ProfileComponent},
     { path: '', redirectTo: 'welcome', pathMatch: 'prefix'},
 ];
 
@@ -69,11 +70,11 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatSnackBarModule,
     MatIconModule,
-    RouterModule.forRoot(appRoutes),
     MatMenuModule,
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    RouterModule.forRoot(appRoutes),
   ],
 
   providers:[MovieDetailsComponent],

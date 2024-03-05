@@ -9,7 +9,6 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 })
 export class MovieCardComponent {
 
-    /** The movie data displayed in the card. */
     movie: any;
 
     constructor(

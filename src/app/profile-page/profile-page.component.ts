@@ -34,7 +34,7 @@ export class ProfileComponent implements OnInit {
   }
 
   public loadUser(): void {
-    this.user = this.fetchApiData.getOneUser();
+    this.fetchApiData.getOneUser().subscribe(response=>{this.user=response});
     this.fetchApiData.getAllMovies().subscribe((response) => {
       this.FavoriteMovies = response.filter((movie: any) => this.user.FavoriteMovies.includes(movie._id));
     });
@@ -76,8 +76,8 @@ export class ProfileComponent implements OnInit {
     getFavorites(): void {
       this.fetchApiData.getOneUser().subscribe(
         (resp: any) => {
-          if (resp.user && resp.user.FavoriteMovies) {
-            this.favorites = resp.user.FavoriteMovies;
+          if (resp && resp.FavoriteMovies) {
+            this.favorites = resp.FavoriteMovies;
           } else {
             this.favorites = []; // Set an empty array if data is not available
           }
@@ -109,7 +109,6 @@ export class ProfileComponent implements OnInit {
       }
     }
 
-
     removeFavoriteMovie(id: string): void {
       this.fetchApiData.deleteFavoriteMovie(id).subscribe(() => {
         this.snackBar.open('removed from favorites', 'OK', {
@@ -132,4 +131,3 @@ export class ProfileComponent implements OnInit {
     }
   
   }
-  

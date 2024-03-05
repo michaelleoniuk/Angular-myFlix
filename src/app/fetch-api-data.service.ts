@@ -96,21 +96,33 @@ export class FetchApiDataService {
 // Get user endpoint
 
 public getUsers() : Observable<any> {
-  return this.http.get(apiUrl + '/users').pipe(map(this.extractResponseData), catchError(this.handleError));
+  const token = localStorage.getItem('token');
+  return this.http.get(apiUrl + '/users', {
+    headers: new HttpHeaders(
+      {
+        Authorization: 'Bearer ' + token,
+      })
+  }).pipe(map(this.extractResponseData), catchError(this.handleError));
 }
 
 public getOneUser() {
-  let user = JSON.parse(localStorage.getItem('user') || '');
-  this.getUsers().subscribe((response) => {
-    user = response.filter((item: any) => item.Username == user.Username);
-  })
-  this.userData.next(user);
-  return user;
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const token = localStorage.getItem('token');
+  return this.http.get(apiUrl + '/users/' + user.Username, {
+    headers: new HttpHeaders(
+    {
+      Authorization: 'Bearer ' + token,
+    })
+  }).pipe(
+    map(this.extractResponseData),
+    catchError(this.handleError)
+  );
 }
+
  getFavoriteMovies(): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
-    return this.http.get(apiUrl + '/users' + user.Username, {
+    return this.http.get(apiUrl + '/users/' + user.Username, {
       headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
@@ -132,7 +144,7 @@ public getOneUser() {
       {
         Authorization: 'Bearer ' + token,
       }),
-      responseType: "text"
+      // responseType: "text"
     }).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
@@ -176,19 +188,13 @@ public getOneUser() {
 public deleteFavoriteMovie(movieID: string): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
-
-    const index = user.FavoriteMovies.indexOf(movieID);
-    console.log(index);
-    if (index > -1) { // only splice array when item is found
-      user.FavoriteMovies.splice(index, 1); // 2nd parameter means remove one item only
-    }
     localStorage.setItem('user', JSON.stringify(user));
     return this.http.delete(apiUrl + '/users/' + user.Username + '/movies/' + movieID, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
         }),
-      responseType: "text"
+      // responseType: "text"
     }).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)

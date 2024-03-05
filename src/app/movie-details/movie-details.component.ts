@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MovieCardComponent } from '../movie-card/movie-card.component';
 import { DirectorComponent } from '../director/director.component';
 import { GenreComponent } from '../genre/genre.component';
-import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,10 +12,8 @@ import { Router } from '@angular/router';
   styleUrl: './movie-details.component.scss'
 })
 export class MovieDetailsComponent implements OnInit{
-
-    movies: any[] = []
     currentmovies: any[] = []
-    currentMoviesSubscription: Subscription = new Subscription();
+    favorites: any[] = []
 
     constructor (
         public fetchApiData: FetchApiDataService,
@@ -25,45 +22,48 @@ export class MovieDetailsComponent implements OnInit{
     ) { }
 
     ngOnInit(): void {
+        this.getFavorites();
         this.getMovies();
       }
 
     getMovies(): void {
-        this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-            this.currentmovies = resp;
-            console.log(this.currentmovies);
-            return this.currentmovies;
-          });
-        }
+    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+        this.currentmovies = resp;
+        return this.currentmovies;
+        });
+    }
 
-        getFavorites(movie: any): boolean {
-            let favoriteMovies: any[] = [];
-            this.fetchApiData.getFavoriteMovies().subscribe((resp: any) => {
-                favoriteMovies = resp;
-            });
-        
-            // Now, perform indexOf check after the subscription
-            return favoriteMovies.indexOf(movie._id) >= 0;
-        }
+    getFavorites(): void {
+        this.fetchApiData.getOneUser().subscribe(
+          (resp: any) => {
+            if (resp && resp.FavoriteMovies) {
+              this.favorites = resp.FavoriteMovies;
+            } else {
+              this.favorites = []; // Set an empty array if data is not available
+            }
+          }
+        );
+      }
     
-        toggleFavorite(movie: any) {
-            this.fetchApiData.getFavoriteMovies().subscribe((favoriteMovies: any[]) => {
-                const index = favoriteMovies.indexOf(movie._id);
-                // If it is favorited, remove
-                if (index !== -1) {
-                    this.fetchApiData.deleteFavoriteMovie(movie._id);
-                // Otherwise, add
-                } else {
-                    this.fetchApiData.addFavoriteMovies(movie._id);
-                }
-            });
+      isFavoriteMovie(movieID: string): boolean {
+        console.log(this.favorites);
+        return this.favorites.includes(movieID);
+      }
+
+    toggleFavorite(movieID: any) {
+        if (this.favorites.includes(movieID)) {
+            this.fetchApiData.deleteFavoriteMovie(movieID).subscribe(res=> console.log(res));
+        // Otherwise, add
+        } else {
+            this.fetchApiData.addFavoriteMovies(movieID).subscribe(res=> console.log(res));
         }
+    }
     
-    openDirectorCardDialog(director: any): void {
+    openDirectorCardDialog(Director: any): void {
         this.dialog.open(DirectorComponent, {
             width: "80%",
             height: "80%",
-            data: {director}
+            data: { Director }
         })
     }
 
@@ -71,15 +71,15 @@ export class MovieDetailsComponent implements OnInit{
         this.dialog.open(MovieCardComponent, {
             width: "80%",
             height: "80%",
-            data: {movie}
+            data: { movie }
         });
     }
 
-    openGenreCardDialog(genre: any): void {
+    openGenreCardDialog(Genre: any): void {
         this.dialog.open(GenreComponent, {
             width: "80%",
             height: "80%",
-            data: {genre}
+            data: { Genre }
         });
     }
 }

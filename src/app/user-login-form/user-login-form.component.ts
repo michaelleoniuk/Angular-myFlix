@@ -24,7 +24,7 @@ export class UserLoginFormComponent {
         this.FetchApiDataService.signin(this.userData).subscribe((result) => {
             this.dialogRef.close();
             localStorage.setItem('token', result.token);
-            localStorage.setItem('user', result.user);
+            localStorage.setItem('user', JSON.stringify(result.user));
             this.snackBar.open('Logged In!  Welcome!', 'OK', {
                 duration: 2000
             });
