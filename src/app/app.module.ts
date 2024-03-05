@@ -33,52 +33,81 @@ import { ProfileComponent } from './profile-page/profile-page.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 
 
+/**
+ * Defines the routes for the application.
+ * 
+ * @remarks
+ * This constant holds an array of route definitions for the application.
+ * Each route object contains information about the path and corresponding component.
+ * 
+ * @example
+ * ```
+ * const appRoutes: Routes = [
+ *     { path: 'welcome', component: WelcomePageComponent},
+ *     { path: 'movies', component: MovieDetailsComponent},
+ *     { path: 'profile', component: ProfileComponent},
+ *     { path: '', redirectTo: 'welcome', pathMatch: 'prefix'},
+ * ];
+ * ```
+ */
 const appRoutes: Routes = [
-    { path: 'welcome', component: WelcomePageComponent},
-    { path: 'movies', component: MovieDetailsComponent},
-    { path: 'profile', component: ProfileComponent},
-    { path: '', redirectTo: 'welcome', pathMatch: 'prefix'},
+  { path: 'welcome', component: WelcomePageComponent},
+  { path: 'movies', component: MovieDetailsComponent},
+  { path: 'profile', component: ProfileComponent},
+  { path: '', redirectTo: 'welcome', pathMatch: 'prefix'},
 ];
 
 /**
- * @module AppModule
- * @description Root module of the Angular application.
- */
+* NgModule that declares and configures the application.
+* 
+* @remarks
+* This module imports necessary modules for the application, declares components,
+* sets up routing, and provides services.
+*/
 @NgModule({
-    declarations: [
-      AppComponent,
-      UserRegistrationFormComponent,
-      UserLoginFormComponent,
-      MovieCardComponent,
-      WelcomePageComponent,
-      NavbarComponent,
-      DirectorComponent,
-      GenreComponent,
-      ProfileComponent,
-      MovieDetailsComponent,
-    ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatDialogModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatSnackBarModule,
-    MatIconModule,
-    MatMenuModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    RouterModule.forRoot(appRoutes),
+  declarations: [
+    AppComponent,
+    UserRegistrationFormComponent,
+    UserLoginFormComponent,
+    MovieCardComponent,
+    WelcomePageComponent,
+    NavbarComponent,
+    DirectorComponent,
+    GenreComponent,
+    ProfileComponent,
+    MovieDetailsComponent,
   ],
+imports: [
+  BrowserModule,
+  AppRoutingModule,
+  HttpClientModule,
+  FormsModule,
+  BrowserAnimationsModule,
+  MatDialogModule,
+  MatInputModule,
+  MatButtonModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatSnackBarModule,
+  MatIconModule,
+  MatMenuModule,
+  ReactiveFormsModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  RouterModule.forRoot(appRoutes),
+],
 
-  providers:[MovieDetailsComponent],
-  
-  bootstrap: [AppComponent]
+/**
+ * Providers for the AppModule.
+ * 
+ * @remarks
+ * This array specifies the providers available at the application level.
+ */
+providers:[MovieDetailsComponent],
+
+/**
+ * The root component that Angular creates and inserts into the index.html host web page.
+ */
+bootstrap: [AppComponent]
 })
 export class AppModule { }

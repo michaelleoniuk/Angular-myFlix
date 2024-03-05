@@ -1,19 +1,22 @@
 <mat-card class="director-dialog">
-    <button
-      class="director-close-button"
-      mat-stroked-button
-      aria-label="Close the director details button"
-      mat-dialog-close
-      color="primary"
-    >
-      X
-    </button>
-    <mat-card-title>
-      <h3 class="director-dialog-title">{{ data.Director.Name }}</h3>
-    </mat-card-title>
+  <button
+    class="director-close-button"
+    mat-stroked-button
+    aria-label="Close the director details button"
+    mat-dialog-close
+    color="primary"
+  >
+    X
+  </button>
+
+  <mat-card-title>
+    <h3 class="director-dialog-title">{{ data.Director.Name }}</h3>
+  </mat-card-title>
+
+  <br />
+
+  <mat-dialog-content class="director-dialog-content">
     <br />
-    <mat-dialog-content class="director-dialog-content">
-      <br />
-      <b>Bio: </b>{{ data.Director.Bio }}
-    </mat-dialog-content>
-  </mat-card>
+    <b>Bio: </b>{{ data.Director.Bio }}
+  </mat-dialog-content>
+</mat-card>

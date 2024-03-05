@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { DirectorComponent } from './director.component';
 
 describe('DirectorComponent', () => {
@@ -21,3 +20,5 @@ describe('DirectorComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+
